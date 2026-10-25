@@ -1,0 +1,20 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno: nunca se suben
+.env
+.env.*
+!.env.example
+
+# Registros y temporales
+*.log
+npm-debug.log*
+coverage/
+dist/
+tmp/
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
