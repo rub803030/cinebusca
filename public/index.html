@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" />
+    <meta
+      name="description"
+      content="CineBusca: busca películas, revisa su reparto y descubre las más populares. Datos de TMDB."
+    />
+    <title>CineBusca · Encuentra tu próxima película</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="CineBusca, ir al inicio">
+        <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v2h2V6H5Zm12 0v2h2V6h-2ZM5 10v2h2v-2H5Zm12 0v2h2v-2h-2ZM5 14v2h2v-2H5Zm12 0v2h2v-2h-2ZM5 18v1h2v-1H5Zm12 0v1h2v-1h-2ZM9 6v12h6V6H9Z"
+          />
+        </svg>
+        <span class="brand-name">Cine<span class="brand-accent">Busca</span></span>
+      </a>
+
+      <form id="search-form" class="search" role="search" novalidate>
+        <label class="sr-only" for="search-input">Buscar películas por título</label>
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M10 4a6 6 0 1 0 3.65 10.75l4.3 4.3a1 1 0 0 0 1.4-1.42l-4.29-4.29A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"
+          />
+        </svg>
+        <input
+          id="search-input"
+          name="q"
+          type="search"
+          placeholder="Busca una película…"
+          autocomplete="off"
+          maxlength="100"
+          enterkeyhint="search"
+        />
+        <button id="search-button" class="btn btn-primary" type="submit">Buscar</button>
+      </form>
+    </header>
+
+    <div id="offline-banner" class="banner banner-warning" role="status" hidden>
+      <span>Sin conexión. Revisa tu red: la búsqueda no funcionará hasta que vuelvas a estar en línea.</span>
+    </div>
+
+    <div id="setup-banner" class="banner banner-info" role="status" hidden>
+      <span>
+        Falta la clave de TMDB. Crea un archivo <code>.env</code> con
+        <code>TMDB_API_KEY=tu_clave</code> y reinicia el servidor.
+      </span>
+    </div>
+
+    <main id="contenido" class="container">
+      <section id="hero" class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Datos en vivo de TMDB</p>
+        <h1 id="hero-title">Encuentra tu próxima película</h1>
+        <p class="hero-text">
+          Busca por título, mira la puntuación, el reparto y la sinopsis. Sin registros y sin salir de la página.
+        </p>
+      </section>
+
+      <section class="results" aria-labelledby="results-title">
+        <div class="results-head">
+          <h2 id="results-title">Películas populares</h2>
+          <p id="results-meta" class="results-meta" aria-live="polite"></p>
+        </div>
+
+        <div id="error-box" class="error-box" role="alert" hidden>
+          <h3 id="error-title">Algo salió mal</h3>
+          <p id="error-message"></p>
+          <button id="retry-button" class="btn btn-secondary" type="button">Reintentar</button>
+        </div>
+
+        <div id="grid" class="grid" aria-busy="false"></div>
+
+        <div id="empty-state" class="empty-state" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M10 4a6 6 0 1 0 3.65 10.75l4.3 4.3a1 1 0 0 0 1.4-1.42l-4.29-4.29A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"
+            />
+          </svg>
+          <h3>No encontramos resultados</h3>
+          <p id="empty-message">Prueba con otro título o revisa la ortografía.</p>
+        </div>
+
+        <div class="load-more-wrap">
+          <button id="load-more" class="btn btn-secondary" type="button" hidden>Cargar más</button>
+          <p id="status-text" class="status-text" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        CineBusca · Proyecto académico. Este producto usa la API de TMDB pero no está avalado ni certificado por TMDB.
+      </p>
+      <p><a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer noopener">themoviedb.org</a></p>
+    </footer>
+
+    <dialog id="detail-dialog" class="detail" aria-labelledby="detail-title">
+      <button id="detail-close" class="detail-close" type="button" aria-label="Cerrar detalle">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6 6.4 5Z"
+          />
+        </svg>
+      </button>
+      <div id="detail-content" class="detail-content"></div>
+    </dialog>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
