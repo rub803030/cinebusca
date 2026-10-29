@@ -26,6 +26,8 @@ La clave de la API vive **solo en el servidor**: el navegador habla con una API 
 
 ## Demo
 
+- Repositorio: <https://github.com/rub803030/cinebusca>
+- Perfil: <https://github.com/rub803030>
 - Video de la demostración (máx. 3 min): _pendiente de agregar el enlace_
 - Guion usado para grabar: [`docs/guion-demo.md`](docs/guion-demo.md)
 
@@ -55,7 +57,7 @@ La clave de la API vive **solo en el servidor**: el navegador habla con una API 
 ### 2. Clonar e instalar
 
 ```bash
-git clone https://github.com/TU_USUARIO/cinebusca.git
+git clone https://github.com/rub803030/cinebusca.git
 cd cinebusca
 npm install
 ```
@@ -240,6 +242,10 @@ Partes hechas sin ayuda de IA:
 
 La bitácora completa, con los prompts y los errores encontrados, está en
 [`docs/bitacora-IA.md`](docs/bitacora-IA.md).
+
+## Autor
+
+**Ruben Jesus Lira Polanco** · [github.com/rub803030](https://github.com/rub803030)
 
 ## Créditos
 

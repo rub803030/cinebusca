@@ -14,19 +14,20 @@ Estado del proyecto frente a lo que pide la actividad.
 
 ## 2. Repositorio de la aplicación
 
-- [ ] Crear el repositorio en GitHub (puede ser público o privado e invitar al docente).
-- [ ] Subir el proyecto:
+- [x] Crear el repositorio público en GitHub.
+- [x] Subir el proyecto (`main` con 9 commits).
+- [x] Verificar que **no** aparezca el archivo `.env` ni ninguna clave.
+- [x] Verificar que el historial tenga varios commits (no uno solo).
+- [x] Enlace al repositorio: <https://github.com/rub803030/cinebusca>
+
+Para futuros cambios:
 
 ```powershell
 cd "C:\Users\rubnl\Documents\Default Project\cinebusca"
-git remote add origin https://github.com/TU_USUARIO/cinebusca.git
-git branch -M main
-git push -u origin main
+git add .
+git commit -m "descripcion del cambio"
+git push
 ```
-
-- [ ] Verificar en GitHub que **no** aparezca el archivo `.env` ni ninguna clave.
-- [ ] Verificar que el historial tenga varios commits (no uno solo).
-- [ ] Enlace al repositorio: `https://github.com/TU_USUARIO/cinebusca`.
 
 ## 3. README.md
 
@@ -35,7 +36,6 @@ git push -u origin main
 - [x] Declaración de herramientas de IA y para qué se usó cada una.
 - [x] Qué parte se hizo sin ayuda de IA.
 - [ ] Completar la URL real del video en la sección **Demo**.
-
 ## 4. Bitácora de programación con IA
 
 - [x] Documento en `docs/bitacora-IA.md` (dentro del repositorio, como permite la consigna).
@@ -79,7 +79,7 @@ Revisar también:
 
 | Archivo / lugar            | Qué cambiar                                         |
 | -------------------------- | --------------------------------------------------- |
-| `README.md`                | `TU_USUARIO`, enlace del video                      |
+| `README.md`                | Enlace del video de la demo                         |
 | `docs/bitacora-IA.md`      | Confirmar prompts y fechas                          |
-| `package.json`             | Autor y URL del repositorio (opcional)              |
+| `package.json`             | Nada: autor y repositorio ya están configurados     |
 | `docs/entrega.md`          | Marcar las casillas al terminar                     |

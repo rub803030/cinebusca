@@ -17,6 +17,10 @@
   ],
   "author": "Ruben Jesus Lira Polanco",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rub803030/cinebusca.git"
+  },
   "engines": {
     "node": ">=18"
   },
