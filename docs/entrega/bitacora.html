@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bitácora de Programación con IA - Proyecto CineBusca</title>
+    <style>
+      :root {
+        --ink: #0f172a;
+        --body: #334155;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --soft: #f8fafc;
+        --accent: #0284c7;
+        --accent-dark: #0369a1;
+        --sky-bg: #e0f2fe;
+        --amber-bg: #fef3c7;
+        --amber-ink: #92400e;
+        --purple-bg: #f3e8ff;
+        --purple-ink: #6b21a8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: var(--body);
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      .page {
+        position: relative;
+        width: 210mm;
+        height: 297mm;
+        padding: 19mm 18mm 17mm;
+        overflow: hidden;
+        page-break-after: always;
+        background: #fff;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      .page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4pt;
+        background: linear-gradient(90deg, #0284c7 0%, #0284c7 55%, #6b21a8 55%, #6b21a8 78%, #f59e0b 78%, #f59e0b 100%);
+      }
+
+      .eyebrow {
+        margin: 0 0 7pt;
+        color: var(--accent-dark);
+        font-size: 8.6pt;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 8pt;
+        color: var(--ink);
+        font-size: 27pt;
+        line-height: 1.02;
+        letter-spacing: -0.025em;
+      }
+
+      .subtitle {
+        margin: 0 0 17pt;
+        max-width: 165mm;
+        color: var(--muted);
+        font-size: 11.2pt;
+        line-height: 1.45;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr 1fr;
+        gap: 8pt;
+        margin-bottom: 18pt;
+      }
+
+      .meta-item {
+        padding: 7.5pt 9pt 8pt;
+        border: 1px solid var(--line);
+        border-radius: 5pt;
+        background: #fff;
+      }
+
+      .meta-label {
+        margin: 0 0 3pt;
+        color: var(--muted);
+        font-size: 7.1pt;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .meta-value {
+        margin: 0;
+        color: var(--ink);
+        font-size: 9.6pt;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: baseline;
+        gap: 6pt;
+        margin: 0 0 11pt;
+        padding-bottom: 5pt;
+        border-bottom: 1.2pt solid var(--line);
+        color: var(--ink);
+        font-size: 12.4pt;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+      }
+
+      .section-title .num {
+        color: var(--accent);
+        font-size: 12.4pt;
+      }
+
+      .prompt {
+        margin-bottom: 11pt;
+        page-break-inside: avoid;
+      }
+
+      .prompt-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4pt;
+      }
+
+      .prompt-id {
+        color: var(--accent-dark);
+        font-size: 8.9pt;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .badge {
+        padding: 2pt 7pt;
+        border-radius: 20pt;
+        font-size: 7.6pt;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .badge.sky {
+        background: var(--sky-bg);
+        color: var(--accent-dark);
+      }
+
+      .badge.amber {
+        background: var(--amber-bg);
+        color: var(--amber-ink);
+      }
+
+      .badge.purple {
+        background: var(--purple-bg);
+        color: var(--purple-ink);
+      }
+
+      .quote {
+        margin: 0 0 5pt;
+        padding: 6.5pt 9pt 6.5pt 10pt;
+        border-left: 2.8pt solid var(--accent);
+        border-radius: 0 4pt 4pt 0;
+        background: var(--soft);
+        color: #475569;
+        font-size: 9.9pt;
+        line-height: 1.42;
+        font-style: italic;
+      }
+
+      .result {
+        margin: 0;
+        color: var(--body);
+        font-size: 10.1pt;
+        line-height: 1.46;
+      }
+
+      .result strong {
+        color: var(--accent-dark);
+        font-weight: 700;
+      }
+
+      .callout {
+        margin: 0 0 11pt;
+        padding: 9pt 11pt;
+        border: 1px solid var(--line);
+        border-left: 3pt solid #dc2626;
+        border-radius: 0 5pt 5pt 0;
+        background: var(--soft);
+      }
+
+      .callout h3 {
+        margin: 0 0 4pt;
+        color: var(--ink);
+        font-size: 10.6pt;
+      }
+
+      .callout p {
+        margin: 0 0 5pt;
+        font-size: 9.8pt;
+        line-height: 1.45;
+      }
+
+      pre {
+        margin: 5pt 0 0;
+        padding: 6pt 8pt;
+        border-radius: 4pt;
+        background: var(--ink);
+        color: #e2e8f0;
+        font-family: "Consolas", "Courier New", monospace;
+        font-size: 8.4pt;
+        line-height: 1.4;
+        white-space: pre-wrap;
+      }
+
+      pre .add {
+        color: #86efac;
+      }
+
+      ul.learn {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      ul.learn li {
+        position: relative;
+        margin-bottom: 6.5pt;
+        padding-left: 13pt;
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      ul.learn li::before {
+        content: "";
+        position: absolute;
+        top: 4.2pt;
+        left: 0;
+        width: 5pt;
+        height: 5pt;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      ul.learn strong {
+        color: var(--ink);
+      }
+
+      .footer {
+        position: absolute;
+        left: 18mm;
+        right: 18mm;
+        bottom: 9mm;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 5pt;
+        border-top: 1px solid var(--line);
+        color: #94a3b8;
+        font-size: 7.9pt;
+      }
+
+      .footer .brand {
+        font-weight: 600;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================== PÁGINA 1 ============================== -->
+    <section class="page">
+      <p class="eyebrow">Bitácora de desarrollo con IA</p>
+      <h1>PROYECTO CINEBUSCA</h1>
+      <p class="subtitle">
+        Registro técnico de prompts, integración de herramientas IA y desarrollo de la aplicación de
+        búsqueda de películas
+      </p>
+
+      <div class="meta">
+        <div class="meta-item">
+          <p class="meta-label">Repositorio oficial</p>
+          <p class="meta-value">rub803030/cinebusca</p>
+        </div>
+        <div class="meta-item">
+          <p class="meta-label">Herramientas IA</p>
+          <p class="meta-value">Big Pickle (OpenCode)</p>
+        </div>
+        <div class="meta-item">
+          <p class="meta-label">API utilizada</p>
+          <p class="meta-value">TMDB · The Movie Database</p>
+        </div>
+      </div>
+
+      <h2 class="section-title"><span class="num">01.</span> Registro histórico de prompts y modificaciones</h2>
+
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">Prompt 01</span>
+          <span class="badge sky">Big Pickle</span>
+        </div>
+        <p class="quote">
+          "Necesito una aplicación web pequeña que consuma una API externa para una tarea. ¿Qué API
+          gratuita me recomiendas para un buscador de películas y cómo estructuro el proyecto con Node
+          y Express?"
+        </p>
+        <p class="result">
+          <strong>Resultado / Implementación:</strong> Se definió TMDB por su plan gratuito para uso
+          educativo y la estructura del proyecto: <em>server.js</em>, <em>lib/</em>, <em>public/</em>,
+          <em>test/</em> y <em>docs/</em>. Se descartó React para poder explicar cada línea del código.
+        </p>
+      </article>
+
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">Prompt 02</span>
+          <span class="badge amber">Big Pickle</span>
+        </div>
+        <p class="quote">
+          "Genera el backend en Express que consulte TMDB sin exponer la clave en el navegador, con
+          .env y .gitignore, y que devuelva errores claros si falta la clave o si TMDB falla."
+        </p>
+        <p class="result">
+          <strong>Resultado / Implementación:</strong> Se creó un cliente con autenticación v3 y v4,
+          timeout de 8 segundos y errores con código propio; las rutas <em>/api/movies/*</em>, la caché
+          de 5 minutos y un manejador central de errores. La clave solo vive en el servidor.
+        </p>
+      </article>
+
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">Prompt 03</span>
+          <span class="badge purple">Big Pickle</span>
+        </div>
+        <p class="quote">
+          "Haz el frontend en HTML, CSS y JavaScript puro: buscador, cuadrícula de pósters responsive y
+          un modal con el detalle de la película. Sin frameworks y sin claves en el cliente."
+        </p>
+        <p class="result">
+          <strong>Resultado / Implementación:</strong> Interfaz con búsqueda en vivo (debounce de 500
+          ms), esqueletos de carga y un <em>&lt;dialog&gt;</em> nativo para el detalle. No funcionó a la
+          primera: el botón "Cargar más" no se ocultaba (ver sección 02).
+        </p>
+      </article>
+
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">Prompt 04</span>
+          <span class="badge sky">Big Pickle</span>
+        </div>
+        <p class="quote">
+          "¿Cómo manejo en el frontend los errores 429, 401 y los timeouts para que el usuario vea
+          mensajes distintos y pueda reintentar?"
+        </p>
+        <p class="result">
+          <strong>Resultado / Implementación:</strong> Un mapa de códigos a mensajes
+          (<em>RATE_LIMIT</em>, <em>AUTH</em>, <em>TIMEOUT</em>, <em>OFFLINE</em>…), una clase
+          <em>ApiError</em> propia y un botón que repite la última petición. Se agregó el tiempo de
+          espera de <em>Retry-After</em>.
+        </p>
+      </article>
+
+      <div class="footer">
+        <span><span class="brand">CineBusca</span> — Bitácora de Desarrollo con IA</span>
+        <span>Página 1 de 2</span>
+      </div>
+    </section>
+
+    <!-- ============================== PÁGINA 2 ============================== -->
+    <section class="page">
+      <h2 class="section-title">
+        <span class="num">01.</span> Registro histórico de prompts (continuación)
+      </h2>
+
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">Prompt 05</span>
+          <span class="badge amber">Big Pickle</span>
+        </div>
+        <p class="quote">
+          "Escríbeme pruebas con node:test para el cliente de TMDB y para los endpoints, incluyendo el
+          caso en que no hay clave configurada."
+        </p>
+        <p class="result">
+          <strong>Resultado / Implementación:</strong> 19 pruebas que cubren URL y parámetros, token
+          v4, error 429 con <em>Retry-After</em>, 401, timeout, fallo de red, JSON inválido, contrato de
+          datos, caché y validaciones. Una prueba de caché era no determinista y se corrigió.
+        </p>
+      </article>
+
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">Prompt 06</span>
+          <span class="badge purple">GitHub / Git</span>
+        </div>
+        <p class="quote">
+          "Revisa el código y dime qué problemas de seguridad o accesibilidad tiene antes de subirlo a
+          GitHub."
+        </p>
+        <p class="result">
+          <strong>Resultado / Implementación:</strong> Se añadieron cabeceras de seguridad y una CSP
+          que solo permite imágenes de <em>image.tmdb.org</em>; se confirmó el uso de
+          <em>textContent</em> en lugar de <em>innerHTML</em>, más <em>aria-live</em>, enlace para
+          saltar al contenido y foco visible. El proyecto se publicó en
+          <em>github.com/rub803030/cinebusca</em> con historial de commits.
+        </p>
+      </article>
+
+      <h2 class="section-title"><span class="num">02.</span> Error de la IA detectado y corrección</h2>
+
+      <div class="callout">
+        <h3>El botón «Cargar más» no se ocultaba</h3>
+        <p>
+          El JavaScript asignaba correctamente <em>hidden = true</em>, pero la regla CSS
+          <em>.btn { display: inline-flex }</em> anulaba el <em>display: none</em> que el navegador
+          aplica al atributo <em>hidden</em>. El botón seguía visible y al pulsarlo se pedía una página
+          inexistente.
+        </p>
+        <p>Se detectó probando la interfaz y se corrigió con una regla explícita:</p>
+        <pre>[hidden] {
+  display: none !important;
+}</pre>
+        <p style="margin-top: 5pt; margin-bottom: 0">
+          También se corrigió el plural: la interfaz mostraba «1 resultados» y «1 películas cargadas».
+        </p>
+      </div>
+
+      <h2 class="section-title"><span class="num">03.</span> Resumen del flujo de trabajo y aprendizajes</h2>
+
+      <ul class="learn">
+        <li>
+          <strong>Probar en el navegador, no solo leer el código:</strong> los dos errores anteriores
+          compilaban y pasaban las pruebas del backend, pero solo se veían al usar la aplicación.
+        </li>
+        <li>
+          <strong>Pedir los casos de error desde el principio:</strong> al enumerar sin conexión, 429,
+          401, timeout y respuesta vacía, el resultado fue mucho más completo que con un «maneja
+          errores» genérico.
+        </li>
+        <li>
+          <strong>Fijar restricciones explícitas:</strong> «sin frameworks», «sin claves en el
+          cliente» y «explícame cada archivo» evitaron propuestas que no pudiera defender en la demo.
+        </li>
+        <li>
+          <strong>Documentar y publicar:</strong> el README, la bitácora y los commits en GitHub dejan
+          trazabilidad del proceso, no solo del resultado final.
+        </li>
+      </ul>
+
+      <div class="footer">
+        <span><span class="brand">CineBusca</span> — Bitácora de Desarrollo con IA</span>
+        <span>Página 2 de 2</span>
+      </div>
+    </section>
+  </body>
+</html>

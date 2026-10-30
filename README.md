@@ -142,7 +142,12 @@ cinebusca/
 │   └── server.test.js     # Pruebas de endpoints, caché y códigos de error
 ├── docs/
 │   ├── bitacora-IA.md     # Bitácora de programación con IA
-│   └── entrega.md         # Checklist de entregables
+│   ├── entrega.md         # Checklist de entregables
+│   └── entrega/           # Documentos finales maquetados
+│       ├── BITACORA-IA.pdf
+│       ├── Entregables-RL.pdf
+│       ├── bitacora.html
+│       └── entregables.html
 ├── .env.example
 ├── .gitignore
 └── package.json
@@ -239,7 +244,8 @@ Partes hechas sin ayuda de IA:
 - La grabación de la demostración y la verificación del repositorio antes de entregar.
 
 La bitácora completa, con los prompts y los errores encontrados, está en
-[`docs/bitacora-IA.md`](docs/bitacora-IA.md).
+[`docs/bitacora-IA.md`](docs/bitacora-IA.md) y en su versión PDF
+[`docs/entrega/BITACORA-IA.pdf`](docs/entrega/BITACORA-IA.pdf).
 
 ## Autor
 

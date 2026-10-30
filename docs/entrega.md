@@ -39,13 +39,13 @@ git push
 ## 4. Bitácora de programación con IA
 
 - [x] Documento en `docs/bitacora-IA.md` (dentro del repositorio, como permite la consigna).
+- [x] Versión PDF maquetada: `docs/entrega/BITACORA-IA.pdf`.
 - [x] Al menos 5 prompts con respuesta, resultado y ajustes.
 - [x] Un error de la IA detectado y cómo se resolvió.
 - [x] Aprendizajes y qué haría distinto.
 - [ ] **Revisar que los prompts coincidan con tu historial real** y ajustar lo que haga falta.
-- [ ] Exportar a PDF si el docente lo pide (abrir el `.md` y "Guardar como PDF", o usar
-      `npx marked docs/bitacora-IA.md -o bitacora.pdf`).
-
+- [x] Exportar a PDF (`docs/entrega/BITACORA-IA.pdf`). Para regenerarlo, abrir
+      `docs/entrega/bitacora.html` en el navegador e imprimir a PDF.
 ## 5. Demostración (3 minutos)
 
 - [ ] Grabar el video o preparar la demo en clase.

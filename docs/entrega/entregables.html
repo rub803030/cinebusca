@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Entregables - CineBusca</title>
+    <style>
+      :root {
+        --ink: #0f172a;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --link: #2563eb;
+        --accent: #0284c7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: var(--ink);
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      .page {
+        position: relative;
+        width: 210mm;
+        height: 297mm;
+        padding: 24mm 24mm 18mm;
+        overflow: hidden;
+      }
+
+      .page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4pt;
+        background: linear-gradient(90deg, #0284c7 0%, #0284c7 55%, #6b21a8 55%, #6b21a8 78%, #f59e0b 78%, #f59e0b 100%);
+      }
+
+      .eyebrow {
+        margin: 0 0 18pt;
+        color: var(--accent);
+        font-size: 8.6pt;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .item {
+        margin-bottom: 22pt;
+        page-break-inside: avoid;
+      }
+
+      .item-title {
+        margin: 0 0 4pt;
+        color: var(--ink);
+        font-size: 13.4pt;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .item-title .num {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .item a,
+      .item .note {
+        display: block;
+        color: var(--link);
+        font-size: 12.6pt;
+        line-height: 1.4;
+        text-decoration: none;
+        word-break: break-all;
+      }
+
+      .item .note {
+        color: var(--muted);
+      }
+
+      .footer {
+        position: absolute;
+        left: 24mm;
+        right: 24mm;
+        bottom: 12mm;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 5pt;
+        border-top: 1px solid var(--line);
+        color: #94a3b8;
+        font-size: 8.4pt;
+      }
+
+      .footer .brand {
+        color: var(--muted);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="page">
+      <p class="eyebrow">Tarea 2 · Entregables</p>
+
+      <div class="item">
+        <p class="item-title"><span class="num">1.</span> Captura de GitHub Pro y enlace a tu perfil.</p>
+        <a href="https://github.com/rub803030">https://github.com/rub803030</a>
+      </div>
+
+      <div class="item">
+        <p class="item-title"><span class="num">2.</span> Enlace al repositorio de la aplicación.</p>
+        <a href="https://github.com/rub803030/cinebusca">https://github.com/rub803030/cinebusca</a>
+      </div>
+
+      <div class="item">
+        <p class="item-title">
+          <span class="num">3.</span> README.md con la declaración de herramientas de IA y las
+          instrucciones de ejecución.
+        </p>
+        <a href="https://github.com/rub803030/cinebusca/blob/main/README.md">
+          https://github.com/rub803030/cinebusca/blob/main/README.md
+        </a>
+      </div>
+
+      <div class="item">
+        <p class="item-title">
+          <span class="num">4.</span> Bitácora de programación con IA (documento adjunto).
+        </p>
+        <a href="https://github.com/rub803030/cinebusca/blob/main/docs/bitacora-IA.md">
+          https://github.com/rub803030/cinebusca/blob/main/docs/bitacora-IA.md
+        </a>
+      </div>
+
+      <div class="item">
+        <p class="item-title">
+          <span class="num">5.</span> Breve demostración (en clase): funcionamiento de la app y una
+          parte del código.
+        </p>
+        <span class="note">CineBusca · Node.js + Express + TMDB</span>
+      </div>
+
+      <div class="footer">
+        <span><span class="brand">Ruben Jesus Lira Polanco</span> · Entregables</span>
+        <span>Página 1 de 1</span>
+      </div>
+    </section>
+  </body>
+</html>
