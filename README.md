@@ -1,4 +1,4 @@
-# CineBusca 🎬
+# CineBusca
 
 Aplicación web pequeña que consume la API de **TMDB (The Movie Database)** para buscar
 películas, ver las más populares y consultar el detalle de cada una (sinopsis, reparto,
