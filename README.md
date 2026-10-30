@@ -29,7 +29,6 @@ La clave de la API vive **solo en el servidor**: el navegador habla con una API 
 - Repositorio: <https://github.com/rub803030/cinebusca>
 - Perfil: <https://github.com/rub803030>
 - Video de la demostración (máx. 3 min): _pendiente de agregar el enlace_
-- Guion usado para grabar: [`docs/guion-demo.md`](docs/guion-demo.md)
 
 ## Tecnologías
 
@@ -143,7 +142,6 @@ cinebusca/
 │   └── server.test.js     # Pruebas de endpoints, caché y códigos de error
 ├── docs/
 │   ├── bitacora-IA.md     # Bitácora de programación con IA
-│   ├── guion-demo.md      # Guion del video de 3 minutos
 │   └── entrega.md         # Checklist de entregables
 ├── .env.example
 ├── .gitignore

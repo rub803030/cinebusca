@@ -48,7 +48,6 @@ git push
 
 ## 5. Demostración (3 minutos)
 
-- [x] Guion en `docs/guion-demo.md`.
 - [ ] Grabar el video o preparar la demo en clase.
 - [ ] Explicar cómo funciona la app y una parte del código (por ejemplo `/api/movies/search`).
 - [ ] Subir el video (YouTube no listado, Drive, etc.) y pegar el enlace en el README.
